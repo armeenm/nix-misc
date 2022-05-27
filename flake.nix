@@ -19,16 +19,13 @@
 
         packages = rec {
           default = apbs;
-          apbs = pkgs.nix.callPackage ./apbs.nix { };
+          apbs = pkgs.nix.callPackage ./apbs.nix { inherit stdenv; };
         };
 
       in {
         inherit packages;
 
-        devShell = mkShell {
-          packages = with pkgs.nix; [
-          ];
-        };
+        devShell = mkShell { };
       }
     );
 }

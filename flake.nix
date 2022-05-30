@@ -18,8 +18,8 @@
         mkShell = pkgs.nix.mkShell.override { inherit stdenv; };
 
         packages = rec {
-          default = apbs;
-          apbs = pkgs.nix.callPackage ./apbs.nix { inherit stdenv; };
+          apbs = pkgs.nix.callPackage ./apbs { };
+          blast = pkgs.nix.callPackage ./blast { };
         };
 
       in {

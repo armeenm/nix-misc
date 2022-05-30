@@ -1,20 +1,22 @@
 { lib, stdenv
 , fetchzip
 , autoPatchelfHook
+, bzip2
 , gcc-unwrapped
+, zlib
 }:
 
 stdenv.mkDerivation rec {
-  pname = "apbs";
-  version = "3.4.1";
+  pname = "blast";
+  version = "2.2.26";
   
   src = fetchzip {
-    url = "https://github.com/Electrostatics/apbs/releases/download/v${version}/APBS-${version}.Linux.zip";
-    hash = "sha256-MXGNDo8HGyup4UK9putKxjjOUpX3RWOuOfDPdaZymeE=";
+    url = "https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/${version}/blast-${version}-x64-linux.tar.gz";
+    hash = "sha256-S7NoVq7rBdnPWd7l/vyumf03zhJDLPWgb/8rhVCoog4=";
   };
 
   nativeBuildInputs = [ autoPatchelfHook ];
-  buildInputs = [ gcc-unwrapped.lib ];
+  buildInputs = [ bzip2 gcc-unwrapped.lib zlib ];
 
   dontConfigure = true;
   dontBuild = true;

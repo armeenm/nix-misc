@@ -1,0 +1,12 @@
+diff --git a/libOTe/Tools/Tools.cpp b/libOTe/Tools/Tools.cpp
+index bfb2a79..6b732e2 100644
+--- a/libOTe/Tools/Tools.cpp
++++ b/libOTe/Tools/Tools.cpp
+@@ -3,7 +3,6 @@
+ #include <cryptoTools/Common/Defines.h>
+ #include <cryptoTools/Common/MatrixView.h>
+ #ifndef _MSC_VER
+-#include <x86intrin.h>
+ #endif
+ 
+ #ifdef OC_ENABLE_SSE2

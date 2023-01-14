@@ -19,7 +19,7 @@ in stdenv.mkDerivation {
     mkdir -p $out/bin $out/lib $out/include
 
     cp TSP/concorde LINKERN/linkern EDGEGEN/edgegen FMATCH/fmatch $out/bin
-    cp concorde.a $out/lib
+    cp concorde.a $out/lib/libconcorde.a
     cp concorde.h $out/include
 
     runHook postInstall

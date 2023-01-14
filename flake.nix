@@ -40,6 +40,7 @@
 
           concorde = import ./concorde { inherit pkgs; };
           mdspan = import ./mdspan { inherit pkgs; };
+          pocketfft = import ./pocketfft { inherit pkgs; };
         };
 
       in {

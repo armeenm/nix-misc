@@ -20,8 +20,10 @@
         mkShell = pkgs.nixpkgs.mkShell.override { inherit stdenv; };
 
         packages = rec {
+          # TODO: Convert this to the new style
           apbs = pkgs.nixpkgs.callPackage ./apbs { };
           blast = pkgs.nixpkgs.callPackage ./blast { };
+
           function2 = import ./function2 { inherit pkgs; };
           macoro = import ./macoro { inherit pkgs optional-lite variant-lite; };
           optional-lite = import ./optional-lite { inherit pkgs; };
@@ -35,6 +37,8 @@
           coproto = import ./coproto {
             inherit pkgs function2 macoro optional-lite span-lite variant-lite;
           };
+
+          concorde = import ./concorde { inherit pkgs; };
         };
 
       in {

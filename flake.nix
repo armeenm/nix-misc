@@ -39,6 +39,7 @@
           };
 
           concorde = import ./concorde { inherit pkgs; };
+          mdspan = import ./mdspan { inherit pkgs; };
         };
 
       in {

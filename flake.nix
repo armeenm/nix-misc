@@ -15,9 +15,7 @@
 
         pkgs = sets.nixpkgs;
 
-        inherit (pkgs) lib;
-        stdenv = pkgs.stdenvNoCC;
-        mkShell = pkgs.mkShell.override { inherit stdenv; };
+        inherit (pkgs) lib stdenv mkShell;
 
         packages = rec {
           apbs = pkgs.callPackage ./apbs { };
@@ -41,10 +39,11 @@
           concorde = pkgs.callPackage ./concorde { };
           mdspan = pkgs.callPackage ./mdspan { };
           pocketfft = pkgs.callPackage ./pocketfft { };
+          filib = pkgs.callPackage ./filib { };
         };
 
       in {
-        inherit packages;
+        inherit pkgs packages;
 
         devShells.default = mkShell { };
       }

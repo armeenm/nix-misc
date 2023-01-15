@@ -1,21 +1,21 @@
-{ pkgs }:
+{ stdenv
+, fetchFromGitHub
+, cmake
+, ninja
+}:
 
-let
-  inherit (pkgs) nixpkgs;
-  inherit (nixpkgs) lib;
-
-in nixpkgs.stdenv.mkDerivation {
+stdenv.mkDerivation {
   pname = "function2";
   version = "4.2.2";
 
-  src = nixpkgs.fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "Naios";
     repo = "function2";
     rev = "4.2.2";
     hash = "sha256-i+ZxLxpmutrbZiUbeHGRGkDzqMmgjAVHU9yXpUZ/rNg=";
   };
 
-  nativeBuildInputs = with nixpkgs; [
+  nativeBuildInputs = [
     cmake
     ninja
   ];

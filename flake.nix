@@ -9,38 +9,38 @@
   outputs = inputs@{ self, utils, ... }:
     utils.lib.eachDefaultSystem (system:
       let
-        pkgs = {
-          nixpkgs = import inputs.nixpkgs {
-            inherit system;
-          };
+        sets = {
+          nixpkgs = import inputs.nixpkgs { inherit system; };
         };
 
-        inherit (pkgs.nixpkgs) lib;
-        stdenv = pkgs.nixpkgs.stdenvNoCC;
-        mkShell = pkgs.nixpkgs.mkShell.override { inherit stdenv; };
+        pkgs = sets.nixpkgs;
+
+        inherit (pkgs) lib;
+        stdenv = pkgs.stdenvNoCC;
+        mkShell = pkgs.mkShell.override { inherit stdenv; };
 
         packages = rec {
-          # TODO: Convert this to the new style
-          apbs = pkgs.nixpkgs.callPackage ./apbs { };
-          blast = pkgs.nixpkgs.callPackage ./blast { };
+          apbs = pkgs.callPackage ./apbs { };
+          blast = pkgs.callPackage ./blast { };
 
-          function2 = import ./function2 { inherit pkgs; };
-          macoro = import ./macoro { inherit pkgs optional-lite variant-lite; };
-          optional-lite = import ./optional-lite { inherit pkgs; };
-          span-lite = import ./span-lite { inherit pkgs; };
-          variant-lite = import ./variant-lite { inherit pkgs; };
+          function2 = pkgs.callPackage ./function2 { };
+          optional-lite = pkgs.callPackage ./optional-lite { };
+          variant-lite = pkgs.callPackage ./variant-lite { };
+          span-lite = pkgs.callPackage ./span-lite { };
 
-          libote = import ./libote {
-            inherit pkgs coproto function2 macoro optional-lite span-lite variant-lite;
+          macoro = pkgs.callPackage ./macoro { inherit optional-lite variant-lite; };
+
+          coproto = pkgs.callPackage ./coproto {
+            inherit function2 macoro optional-lite span-lite variant-lite;
           };
 
-          coproto = import ./coproto {
-            inherit pkgs function2 macoro optional-lite span-lite variant-lite;
+          libote = pkgs.callPackage ./libote {
+            inherit coproto function2 macoro optional-lite span-lite variant-lite;
           };
 
-          concorde = import ./concorde { inherit pkgs; };
-          mdspan = import ./mdspan { inherit pkgs; };
-          pocketfft = import ./pocketfft { inherit pkgs; };
+          concorde = pkgs.callPackage ./concorde { };
+          mdspan = pkgs.callPackage ./mdspan { };
+          pocketfft = pkgs.callPackage ./pocketfft { };
         };
 
       in {

@@ -1,14 +1,13 @@
-{ pkgs }:
+{ lib
+, stdenv
+, fetchzip
+}:
 
-let
-  inherit (pkgs) nixpkgs;
-  inherit (nixpkgs) lib stdenv;
-
-in stdenv.mkDerivation {
+stdenv.mkDerivation {
   pname = "concorde";
   version = "unstable-2003-12-19";
 
-  src = nixpkgs.fetchzip {
+  src = fetchzip {
     url = "https://www.math.uwaterloo.ca/tsp/concorde/downloads/codes/src/co031219.tgz";
     hash = "sha256-vQQrM6DC9fxylrGi1cEmHm84MpqSZnlUwkUBgwILxUg=";
   };

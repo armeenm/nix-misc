@@ -25,4 +25,26 @@ in rec {
   mdspan = callPackage ./mdspan { };
   pocketfft = callPackage ./pocketfft { };
   filib = callPackage ./filib { };
+
+  coindatasample = callPackage ./coindatasample { };
+  coindatanetlib = callPackage ./coindatanetlib { };
+
+  coinglpk = callPackage ./coinglpk { };
+  coinutils = callPackage ./coinutils { inherit coindatasample coinglpk; };
+
+  osi = callPackage ./osi {
+    inherit coindatasample coindatanetlib coinglpk coinutils;
+  };
+
+  clp = callPackage ./clp {
+    inherit coindatasample coindatanetlib coinglpk coinutils osi;
+  };
+
+  cgl = callPackage ./cgl {
+    inherit coindatasample coinutils osi clp;
+  };
+
+  cbc = callPackage ./cbc {
+    inherit coindatasample coinglpk coinutils osi clp cgl;
+  };
 }

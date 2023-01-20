@@ -9,37 +9,37 @@
   outputs = inputs@{ self, utils, ... }:
     utils.lib.eachDefaultSystem (system:
       let
-        sets = {
-          nixpkgs = import inputs.nixpkgs { inherit system; };
+        sets = with inputs; {
+          nixpkgs = import nixpkgs { inherit system; };
         };
 
         pkgs = sets.nixpkgs;
 
-        inherit (pkgs) lib stdenv mkShell;
+        inherit (pkgs) callPackage lib stdenv mkShell;
 
         packages = rec {
-          apbs = pkgs.callPackage ./apbs { };
-          blast = pkgs.callPackage ./blast { };
+          apbs = callPackage ./apbs { };
+          blast = callPackage ./blast { };
 
-          function2 = pkgs.callPackage ./function2 { };
-          optional-lite = pkgs.callPackage ./optional-lite { };
-          variant-lite = pkgs.callPackage ./variant-lite { };
-          span-lite = pkgs.callPackage ./span-lite { };
+          function2 = callPackage ./function2 { };
+          optional-lite = callPackage ./optional-lite { };
+          variant-lite = callPackage ./variant-lite { };
+          span-lite = callPackage ./span-lite { };
 
-          macoro = pkgs.callPackage ./macoro { inherit optional-lite variant-lite; };
+          macoro = callPackage ./macoro { inherit optional-lite variant-lite; };
 
-          coproto = pkgs.callPackage ./coproto {
+          coproto = callPackage ./coproto {
             inherit function2 macoro optional-lite span-lite variant-lite;
           };
 
-          libote = pkgs.callPackage ./libote {
+          libote = callPackage ./libote {
             inherit coproto function2 macoro optional-lite span-lite variant-lite;
           };
 
-          concorde = pkgs.callPackage ./concorde { };
-          mdspan = pkgs.callPackage ./mdspan { };
-          pocketfft = pkgs.callPackage ./pocketfft { };
-          filib = pkgs.callPackage ./filib { };
+          concorde = callPackage ./concorde { };
+          mdspan = callPackage ./mdspan { };
+          pocketfft = callPackage ./pocketfft { };
+          filib = callPackage ./filib { };
         };
 
       in {

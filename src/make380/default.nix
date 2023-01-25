@@ -1,5 +1,4 @@
 { stdenv
-, gcc49Stdenv
 , fetchzip
 }:
 

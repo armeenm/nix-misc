@@ -14,6 +14,7 @@
         };
 
         pkgs = sets.nixpkgs;
+
         inherit (pkgs) mkShell;
 
         packages = import ./src { inherit pkgs; };

@@ -1,7 +1,7 @@
 { pkgs }:
 
 let
-  inherit (pkgs) callPackage;
+  callPackage = pkgs.lib.callPackageWith pkgs;
 in rec {
   apbs = callPackage ./apbs { };
   blast = callPackage ./blast { };
@@ -47,4 +47,6 @@ in rec {
   cbc = callPackage ./cbc {
     inherit coindatasample coinglpk coinutils osi clp cgl;
   };
+
+  make380 = callPackage ./make380 { };
 }

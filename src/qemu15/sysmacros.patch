@@ -1,0 +1,11 @@
+diff -ru a/hw/9pfs/virtio-9p.c b/hw/9pfs/virtio-9p.c
+--- a/hw/9pfs/virtio-9p.c	2023-02-02 09:06:16.556849897 -0600
++++ b/hw/9pfs/virtio-9p.c	2023-02-02 09:06:29.789508254 -0600
+@@ -20,6 +20,7 @@
+ #include "virtio-9p-coth.h"
+ #include "trace.h"
+ #include "migration/migration.h"
++#include <sys/sysmacros.h>
+ 
+ int open_fd_hw;
+ int total_open_fd;

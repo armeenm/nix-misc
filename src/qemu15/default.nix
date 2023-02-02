@@ -60,6 +60,4 @@ stdenv.mkDerivation rec {
     "--smbd=smbd" # use `smbd' from $PATH
     "--target-list=i386-softmmu,x86_64-softmmu"
   ];
-
-  preBuild = "echo $ARFLAGS";
 }

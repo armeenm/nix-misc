@@ -50,4 +50,6 @@ in rec {
 
   make380 = callPackage ./make380 { };
   qemu15 = callPackage ./qemu15 { };
+
+  tuxemu = callPackage ./tuxemu { };
 }

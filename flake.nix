@@ -1,28 +1,28 @@
 {
-  description = "";
+  description = "Various Nix packages";
 
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixpkgs-unstable;
-    utils.url = github:numtide/flake-utils;
   };
 
-  outputs = inputs@{ self, utils, ... }:
-    utils.lib.eachDefaultSystem (system:
-      let
-        sets = with inputs; {
-          nixpkgs = import nixpkgs { inherit system; };
+  outputs = inputs@{ self, nixpkgs, ... }:
+    let
+      config = {
+        allowUnfree = true;
+      };
+
+      forAllSystems = f: nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-linux"
+      ] (system: f system (import nixpkgs { inherit system config; }));
+
+    in {
+      packages = forAllSystems (_: pkgs: import ./src { inherit pkgs; });
+
+      devShells = forAllSystems (_: pkgs: with pkgs; {
+        default = mkShell {
+          packages = [];
         };
-
-        pkgs = sets.nixpkgs;
-
-        inherit (pkgs) mkShell;
-
-        packages = import ./src { inherit pkgs; };
-
-      in {
-        inherit pkgs packages;
-
-        devShells.default = mkShell { };
-      }
-    );
+      });
+    };
 }

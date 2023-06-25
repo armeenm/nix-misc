@@ -52,4 +52,6 @@ in rec {
   qemu15 = callPackage ./qemu15 { };
 
   tuxemu = callPackage ./tuxemu { };
+
+  git-fuzzy = callPackage ./git-fuzzy { };
 }

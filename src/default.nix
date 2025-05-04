@@ -54,4 +54,6 @@ in rec {
   tuxemu = callPackage ./tuxemu { };
 
   git-fuzzy = callPackage ./git-fuzzy { };
+
+  partclone-utils = callPackage ./partclone-utils { };
 }

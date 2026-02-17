@@ -2,7 +2,7 @@
   description = "Various Nix packages";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixpkgs-unstable;
+    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:

@@ -56,4 +56,6 @@ in rec {
   git-fuzzy = callPackage ./git-fuzzy { };
 
   partclone-utils = callPackage ./partclone-utils { };
+
+  launchk = callPackage ./launchk { };
 }

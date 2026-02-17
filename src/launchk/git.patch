@@ -1,0 +1,13 @@
+diff --git a/launchk/src/main.rs b/launchk/src/main.rs
+index e939f98..026f923 100644
+--- a/launchk/src/main.rs
++++ b/launchk/src/main.rs
+@@ -39,7 +39,7 @@ fn main() {
+     let root_layout = NamedView::new("root_layout", root_layout);
+ 
+     let panel = Panel::new(root_layout)
+-        .title(format!("launchk ({})", git_version!()))
++        .title("launchk")
+         .full_width()
+         .full_height();
+ 
